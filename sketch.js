@@ -11,13 +11,13 @@ function setup(){
   hypnoticBall.shapeColor = "red";
 
 
-  var hypnoticBallPosition = database.ref('ball/pocision');
+  var hypnoticBallPosition = database.ref('ball/position');
   hypnoticBallPosition.on("value", readPosition, showError);
 }
 
 function draw(){
   background("white");
-  if (pasition !== undefined){
+  
     if(keyDown(LEFT_ARROW)){
       writePosition(-1,0);
     }
@@ -31,11 +31,11 @@ function draw(){
       writePosition(0,+1);
     }
     drawSprites();
-  }
+  
 }
 
 function writePosition(x,y){
-  database.ref('ball/pocision').set({
+  database.ref('ball/position').set({
     'x': position.x + x ,
     'y': position.y + y
   })
@@ -43,7 +43,7 @@ function writePosition(x,y){
 
 function readPosition(data){
   position = data.val();
-  console.log(position.x, position.y);
+  console.log(position.x);
   hypnoticBall.x = position.x;
   hypnoticBall.y = position.y;
 }
